@@ -25,6 +25,9 @@ const CollegeCard = ({ collegeData }) => {
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {research_history}
           </p>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Admission Date : {admission_dates}
+          </p>
           <div className="mb-4">
             <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">
               Events :
