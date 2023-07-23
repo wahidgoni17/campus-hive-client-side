@@ -9,7 +9,7 @@ const Footers = () => {
       <Footer container className="bg-gradient-to-r from-slate-100 to-slate-300">
         <div className="w-full">
           <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-            <div className="container mx-auto text-black grid grid-cols-3 items-center gap-6 sm:mt-4 md:grid-cols-4 md:gap-8">
+            <div className="container mx-auto text-black grid grid-cols-2 items-center gap-10 sm:mt-4 md:grid-cols-4 md:gap-8">
               <div className="flex gap-2">
                 <img className="w-10 h-10" src={logo} />
                 <h1 className="text-3xl font-bold">CampusHive</h1>

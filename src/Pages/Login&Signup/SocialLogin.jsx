@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
 
 const SocialLogin = () => {
     const { googleLogIn, githubLogIn } = useAuth();
@@ -10,7 +11,15 @@ const SocialLogin = () => {
   const handleGoogleLogin = () => {
     googleLogIn()
       .then((result) => {
-        navigate(from, { replace: true });
+        const googleLogged = result.user;
+        axios
+          .post("http://localhost:4560/users", {
+            name: googleLogged.displayName,
+            email: googleLogged.email,
+          })
+          .then(() => {
+            navigate(from, { replace: true });
+          });
       })
       .catch((error) => {
         console.log(error);

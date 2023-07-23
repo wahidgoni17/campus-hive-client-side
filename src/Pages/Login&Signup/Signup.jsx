@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "./SocialLogin";
+import axios from "axios";
 
 const Signup = () => {
   const { newUser, updateUserProfile } = useAuth();
@@ -17,11 +18,23 @@ const Signup = () => {
   const onSubmit = (data) => {
     console.log(data);
     newUser(data.email, data.password)
-      .then((result) => {
-        updateUserProfile(data.name, data.photo);
-        Swal.fire("Successfully!", "Your Account Is created", "success");
-        navigate("/");
-      })
+    .then(result=>{
+      const registeredUser = result.user
+      console.log(registeredUser)
+      updateUserProfile(data.name, data.photo)
+      .then(()=>{})
+          axios.post("http://localhost:4560/users",{
+            name: data.name, email: data.email
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.data.insertedId) {
+              reset()
+              Swal.fire("Successfully!", "Your Account Is created", "success");
+              navigate("/");
+            }
+          });
+    })
       .catch((error) => console.log(error));
   };
   return (

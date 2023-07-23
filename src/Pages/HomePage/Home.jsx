@@ -1,12 +1,14 @@
-import React from 'react';
-import CollegeSection from './CollegeSection/CollegeSection';
+import React from "react";
+import CollegeSection from "./CollegeSection/CollegeSection";
+import Gallery from "./GallerySection/Gallery";
 
 const Home = () => {
-    return (
-        <>
-          <CollegeSection/>
-        </>
-    );
+  return (
+    <>
+      <CollegeSection />
+      <Gallery />
+    </>
+  );
 };
 
 export default Home;
