@@ -7,6 +7,9 @@ import Home from "./Pages/HomePage/Home";
 import Colleges from "./Pages/Colleges/Colleges";
 import Admission from "./Pages/Admission/Admission";
 import MyCollege from "./Pages/MyCollege/MyCollege";
+import AuthProvider from "./Providers/AuthProvider";
+import Login from "./Pages/Login&Signup/Login";
+import Signup from "./Pages/Login&Signup/Signup";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,14 @@ const router = createBrowserRouter([
         path: "myCollege",
         element: <MyCollege />,
       },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
     ],
   },
 ]);
@@ -36,7 +47,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div className="max-w-7xl mx-auto">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   </React.StrictMode>
 );
