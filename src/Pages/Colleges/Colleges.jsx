@@ -3,14 +3,11 @@ import React, { useEffect, useState } from "react";
 import TitleCard from "../../Layout/Shared/TitleCard";
 import CollegeCard from "./CollegeCard";
 import SingleCollege from "./SingleCollege";
+import useColleges from "../../Hooks/usecolleges";
 
 const Colleges = () => {
-  const [colleges, setColleges] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:4560/colleges").then((res) => {
-      setColleges(res.data);
-    });
-  }, []);
+  const colleges = useColleges()
+  console.log(colleges);
   return (
     <>
       <TitleCard title="Our Colleges" />

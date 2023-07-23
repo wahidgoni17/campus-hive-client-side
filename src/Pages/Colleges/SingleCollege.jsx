@@ -60,7 +60,7 @@ const SingleCollege = ({ collegeData }) => {
               </div>
             </div>
           )}
-          <div className="text-end">
+          <div className="text-end mt-5">
             <button
               onClick={() => setShowDetails(!showDetails)}
               type="button"

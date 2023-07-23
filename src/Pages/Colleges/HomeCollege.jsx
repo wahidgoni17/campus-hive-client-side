@@ -1,14 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CollegeCard from "./CollegeCard";
+import useColleges from "../../Hooks/usecolleges";
 
 const HomeCollege = () => {
-  const [colleges, setColleges] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:4560/colleges").then((res) => {
-      setColleges(res.data);
-    });
-  }, []);
+  const colleges = useColleges()
   const homeColleges = colleges.slice(0,3)
   console.log(homeColleges);
 
