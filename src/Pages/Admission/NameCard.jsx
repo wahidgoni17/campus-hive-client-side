@@ -15,7 +15,7 @@ const NameCard = ({ collegeData }) => {
   const { register, reset, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    axios.post("http://localhost:4560/collegeCart", {
+    axios.post("https://campushive-server.vercel.app/collegeCart", {
       name: data.name,
       College_Name: college_name,
       email: data.email,

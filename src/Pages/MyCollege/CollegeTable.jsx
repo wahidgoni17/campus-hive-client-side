@@ -20,7 +20,7 @@ const CollegeTable = () => {
   const { register, reset, handleSubmit } = useForm();
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:4560/reviews", {
+      .post("https://campushive-server.vercel.app/reviews", {
         name: user?.displayName,
         college_Name: college_name,
         review: data.review,

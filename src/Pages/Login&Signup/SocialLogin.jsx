@@ -13,7 +13,7 @@ const SocialLogin = () => {
       .then((result) => {
         const googleLogged = result.user;
         axios
-          .post("http://localhost:4560/users", {
+          .post("https://campushive-server.vercel.app/users", {
             name: googleLogged.displayName,
             email: googleLogged.email,
           })

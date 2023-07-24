@@ -23,7 +23,7 @@ const Signup = () => {
       console.log(registeredUser)
       updateUserProfile(data.name, data.photo)
       .then(()=>{})
-          axios.post("http://localhost:4560/users",{
+          axios.post("https://campushive-server.vercel.app/users",{
             name: data.name, email: data.email
           })
           .then((data) => {

@@ -6,7 +6,7 @@ const UseCollegeCart = () => {
     const {user} = useAuth()
     const [collegeCart, setCollegeCart] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:4560/collegeCart?email=${user?.email}`)
+    axios.get(`https://campushive-server.vercel.app/collegeCart?email=${user?.email}`)
     .then((res) => {
       setCollegeCart(res.data);
     });
