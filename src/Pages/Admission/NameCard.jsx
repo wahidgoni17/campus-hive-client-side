@@ -1,21 +1,38 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const NameCard = ({ collegeData }) => {
   const { college_name, research_history } = collegeData;
-
-  // State variable to track the visibility of the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Function to handle opening the modal
   const openModal = () => {
     setIsModalOpen(true);
   };
-
-  // Function to handle closing the modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+  const { register, reset, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    axios.post("http://localhost:4560/collegeCart", {
+      name: data.name,
+      College_Name: college_name,
+      email: data.email,
+      Subject: data.subject,
+      Address: data.address,
+      Phone: data.phone,
+      Date_of_Birth: data.dateofbirth,
+    })
+    .then((data) =>{
+        console.log(data.data);
+        if (data.data.insertedId) {
+            reset()
+            Swal.fire("Successfully!", "Admission Form filled", "success");
+            setIsModalOpen(false)
+          }
+    })
+  };
   return (
     <>
       <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -27,7 +44,6 @@ const NameCard = ({ collegeData }) => {
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {research_history}
         </p>
-        {/* Open the modal when the button is clicked */}
         <button
           onClick={openModal}
           className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -35,8 +51,6 @@ const NameCard = ({ collegeData }) => {
           Admission Form
         </button>
       </div>
-
-      {/* Main modal */}
       {isModalOpen && (
         <div
           id="authentication-modal"
@@ -68,15 +82,15 @@ const NameCard = ({ collegeData }) => {
               <span className="sr-only">Close modal</span>
             </button>
             <div className="px-20 py-10 lg:px-8">
-              {/* Modal content */}
               <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                 {college_name}
               </h3>
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="relative z-0 w-full mb-6 group">
                   <input
                     type="text"
                     name="floating_name"
+                    {...register("name")}
                     id="floating_name"
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
@@ -94,6 +108,7 @@ const NameCard = ({ collegeData }) => {
                     type="email"
                     name="floating_email"
                     id="floating_email"
+                    {...register("email")}
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     required
@@ -110,6 +125,7 @@ const NameCard = ({ collegeData }) => {
                     type="text"
                     name="subject"
                     id="subject"
+                    {...register("subject")}
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     required
@@ -126,6 +142,7 @@ const NameCard = ({ collegeData }) => {
                     type="text"
                     name="address"
                     id="address"
+                    {...register("address")}
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     required
@@ -141,8 +158,8 @@ const NameCard = ({ collegeData }) => {
                   <div className="relative z-0 w-full mb-8 group">
                     <input
                       type="tel"
-                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
+                      {...register("phone")}
                       id="floating_phone"
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
@@ -160,6 +177,7 @@ const NameCard = ({ collegeData }) => {
                       type="date"
                       name="dateOfbirth"
                       id="floating_company"
+                      {...register("dateofbirth")}
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
                       required
@@ -174,7 +192,7 @@ const NameCard = ({ collegeData }) => {
                 </div>
                 <button
                   type="submit"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   Submit
                 </button>

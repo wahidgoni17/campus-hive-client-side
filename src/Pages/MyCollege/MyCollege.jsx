@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
+import TitleCard from "../../Layout/Shared/TitleCard";
+import CollegeTable from "./CollegeTable";
 
 const MyCollege = () => {
-    return (
-        <div>
-            <h1>this is my college page</h1>
-        </div>
-    );
+  
+  return (
+    <>
+      <TitleCard title="My College" />
+      <CollegeTable></CollegeTable>
+    </>
+  );
 };
 
 export default MyCollege;

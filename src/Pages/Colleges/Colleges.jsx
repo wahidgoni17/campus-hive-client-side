@@ -1,12 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TitleCard from "../../Layout/Shared/TitleCard";
-import CollegeCard from "./CollegeCard";
 import SingleCollege from "./SingleCollege";
 import useColleges from "../../Hooks/usecolleges";
 
 const Colleges = () => {
-  const colleges = useColleges()
+  const colleges = useColleges();
   console.log(colleges);
   return (
     <>
