@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         element: <CollegeDetails></CollegeDetails>,
         loader: ({ params }) =>
           fetch(
-            `http://localhost:4560/colleges/${params.id}`
+            `https://campushive-server.vercel.app/colleges/${params.id}`
           ),
       },
       {

@@ -11,7 +11,7 @@ const SearchBar = () => {
     setSearch(searchRef.current.value);
   };
   useEffect(() => {
-    axios.get(`http://localhost:4560/colleges?search=${search}`).then((res) => {
+    axios.get(`https://campushive-server.vercel.app/colleges?search=${search}`).then((res) => {
       setCollege(res.data);
     });
   }, [search]);
